@@ -9,9 +9,9 @@ import lombok.RequiredArgsConstructor;
 @Data
 public class GitHubDetailsDto {
 
-    final String fullName;
-    final String description;
-    final String cloneUrl;
-    final Integer stars;
-    final String createdAt;
+    private final String fullName;
+    private final String description;
+    private final String cloneUrl;
+    private final Integer stars;
+    private final String createdAt;
 }

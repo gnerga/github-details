@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/github-details")
 public class GitDetailsController {
     private final GitHubDetailsService service;
+
     @GetMapping("/{owner}/{repo}")
-    public GitHubDetailsDto getHitHubUserRepository(@PathVariable("owner")String owner, @PathVariable("repo") String repo) {
+    public GitHubDetailsDto getHitHubUserRepository(@PathVariable("owner") String owner, @PathVariable("repo") String repo) {
         return service.getUserRepo(owner, repo);
     }
 

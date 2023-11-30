@@ -1,5 +1,6 @@
 package com.gnerga.app.remote.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -9,9 +10,13 @@ import lombok.RequiredArgsConstructor;
 @Data
 public class GitHubResponseDto {
 
-    final String full_name;
-    final String description;
-    final String cloneUrl;
-    final Integer stars;
-    final String created_at;
+    @JsonProperty("full_name")
+    private final String fullName;
+    private final String description;
+    @JsonProperty("clone_url")
+    private final String cloneUrl;
+    @JsonProperty("stargazers_count")
+    private final Integer stars;
+    @JsonProperty("created_at")
+    private final String createdAt;
 }

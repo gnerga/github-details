@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class GitHubDetailsService {
     private final GitHubClient gitHubClient;
     private final GitHubDetailsMapper mapper;
+
     public GitHubDetailsDto getUserRepo(String owner, String repo) {
         GitHubResponseDto response = gitHubClient.getRepository(owner, repo);
         return mapper.mapToDetails(response);
