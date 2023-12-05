@@ -3,9 +3,11 @@ package com.gnerga.app.service;
 import com.gnerga.app.mapper.GitHubDetailsMapper;
 import com.gnerga.app.remote.GitHubClient;
 import com.gnerga.app.dto.GitHubDetailsDto;
-import com.gnerga.app.remote.model.GitHubResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -14,7 +16,14 @@ public class GitHubDetailsService {
     private final GitHubDetailsMapper mapper;
 
     public GitHubDetailsDto getUserRepo(String owner, String repo) {
-        GitHubResponseDto response = gitHubClient.getRepository(owner, repo);
+        var response = gitHubClient.getRepository(owner, repo);
         return mapper.mapToDetails(response);
+    }
+
+    public List<GitHubDetailsDto> getUserRepos(String owner) {
+        var gitHubResponse = gitHubClient.getUserRepos(owner);
+        return gitHubResponse.stream()
+                .map(mapper::mapToDetails)
+                .collect(Collectors.toList());
     }
 }

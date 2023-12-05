@@ -17,6 +17,7 @@
 		<java.version>17</java.version>
 		<spring-cloud.version>2022.0.0</spring-cloud.version>
 		<mapstract.version>1.5.5.Final</mapstract.version>
+		<openapi.version>2.2.0</openapi.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -26,6 +27,11 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${openapi.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>

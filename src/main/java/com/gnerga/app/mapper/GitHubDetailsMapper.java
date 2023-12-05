@@ -3,10 +3,10 @@ package com.gnerga.app.mapper;
 import com.gnerga.app.remote.model.GitHubResponseDto;
 import com.gnerga.app.dto.GitHubDetailsDto;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        componentModel = "spring")
 public interface GitHubDetailsMapper {
-    GitHubDetailsDto mapToDetails(GitHubResponseDto detailsDto);
+    GitHubDetailsDto mapToDetails(GitHubResponseDto responseDto);
 }
