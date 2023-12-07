@@ -2,6 +2,7 @@ package com.gnerga.app.service;
 
 import com.gnerga.app.mapper.GitHubDetailsMapper;
 import com.gnerga.app.remote.GitHubClient;
+import com.gnerga.app.repository.GitHubDetailsRepository;
 import com.gnerga.app.resources.GitHubDetailsDtoTestFactory;
 import com.gnerga.app.resources.GitHubResponseDtoTestFactory;
 import org.junit.jupiter.api.Assertions;
@@ -14,6 +15,7 @@ class GitHubDetailsServiceTest {
     private GitHubClient gitHubClient;
     private GitHubDetailsMapper gitHubDetailsMapper;
     private GitHubDetailsService gitHubDetailsService;
+    private GitHubDetailsRepository repository;
     private static final String USERNAME = "superName";
     private static final String REPO_NAME = "super-repo";
 
@@ -21,7 +23,8 @@ class GitHubDetailsServiceTest {
     void setup() {
         this.gitHubClient = Mockito.mock(GitHubClient.class);
         this.gitHubDetailsMapper = Mappers.getMapper(GitHubDetailsMapper.class);
-        this.gitHubDetailsService = new GitHubDetailsService(gitHubClient, gitHubDetailsMapper);
+        this.repository = Mockito.mock(GitHubDetailsRepository.class);
+        this.gitHubDetailsService = new GitHubDetailsService(gitHubClient, gitHubDetailsMapper, repository);
     }
 
     @Test
@@ -30,7 +33,7 @@ class GitHubDetailsServiceTest {
         var expected = GitHubDetailsDtoTestFactory.getGitHubDetailsDto();
         Mockito.when(gitHubClient.getRepository(USERNAME, REPO_NAME)).thenReturn(response);
 
-        var result = gitHubDetailsService.getUserRepo(USERNAME, REPO_NAME);
+        var result = gitHubDetailsService.getRemoteUserRepository(USERNAME, REPO_NAME);
 
         Assertions.assertEquals(expected.getFullName(), result.getFullName());
         Assertions.assertEquals(expected.getDescription(), result.getDescription());
@@ -45,7 +48,7 @@ class GitHubDetailsServiceTest {
         var expected = GitHubDetailsDtoTestFactory.getReturnedList();
         Mockito.when(gitHubClient.getUserRepos(USERNAME)).thenReturn(response);
 
-        var result = gitHubDetailsService.getUserRepos(USERNAME);
+        var result = gitHubDetailsService.getListUserRepositories(USERNAME);
 
         Assertions.assertEquals(expected.get(0).getFullName(), result.get(0).getFullName());
         Assertions.assertEquals(expected.get(0).getDescription(), result.get(0).getDescription());

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -19,6 +20,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestPropertySource(
+        properties = {
+                "spring.data.mongodb.username=root",
+                "spring.data.mongodb.password=root",
+                "spring.data.mongodb.database=mongo_db",
+                "spring.data.mongodb.port=27017",
+                "spring.data.mongodb.host=127.0.0.1",
+                "spring.data.mongodb.authentication-database=admin"
+        })
 class GitDetailsControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
