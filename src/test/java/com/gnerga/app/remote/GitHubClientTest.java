@@ -12,10 +12,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest
 @AutoConfigureWireMock(port = 80)
 @NoArgsConstructor
+@TestPropertySource(
+        properties = {
+                "spring.data.mongodb.username=root",
+                "spring.data.mongodb.password=root",
+                "spring.data.mongodb.database=mongo_db",
+                "spring.data.mongodb.port=27017",
+                "spring.data.mongodb.host=mongo_db",
+                "spring.data.mongodb.authentication-database=admin"
+        })
 class GitHubClientTest {
     @Autowired
     WireMockServer wireMockServer;
